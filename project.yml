@@ -1,0 +1,40 @@
+name: SolarSystemTracker
+options:
+  bundleIdPrefix: com.solarsystemtracker
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+targets:
+  SolarSystemTracker:
+    type: application
+    platform: macOS
+    sources:
+      - SolarSystemTracker
+      - Ephemeris
+      - Observe
+      - UI
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.solarsystemtracker.app
+        INFOPLIST_FILE: Info.plist
+        GENERATE_INFOPLIST_FILE: false
+        LD_RUNPATH_SEARCH_PATHS: "@executable_path/../Frameworks"
+        PRODUCT_NAME: Solar System Tracker
+    info:
+      path: Info.plist
+      properties:
+        NSLocationWhenInUseUsageDescription: Used to compute rise/set and sky visibility from your observing site.
+  SelfCheck:
+    type: tool
+    platform: macOS
+    sources:
+      - SelfCheck
+      - Ephemeris
+      - Observe/ObservabilityEngine.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.solarsystemtracker.selfcheck
